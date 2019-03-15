@@ -1,19 +1,19 @@
 package Service;
 
-import Domain.Drug;
+import Domain.Medicine;
 import Domain.Transaction;
-import Repository.DrugRepository;
+import Repository.MedicineRepository;
 import Repository.TransactionRepository;
 
 import java.util.List;
 
 public class TransactionService {
     private TransactionRepository transactionRepository;
-    private DrugRepository drugRepository;
+    private MedicineRepository medicineRepository;
 
-    public TransactionService(TransactionRepository transactionRepository, DrugRepository drugRepository) {
+    public TransactionService(TransactionRepository transactionRepository, MedicineRepository medicineRepository) {
         this.transactionRepository = transactionRepository;
-        this.drugRepository = drugRepository;
+        this.medicineRepository = medicineRepository;
     }
 
     public Transaction addOrUpdate(String id, String idDrug, String idClientCard, int numberOfItems, String date, String time) {
@@ -34,16 +34,16 @@ public class TransactionService {
                 time = existing.getTime();
             }
         }
-        Drug drugSold = drugRepository.findById(idDrug);
-        if (drugSold == null) {
+        Medicine medicineSold = medicineRepository.findById(idDrug);
+        if (medicineSold == null) {
             throw new RuntimeException("There is no drug with the given id!");
         }
-        double basePrice = drugSold.getPrice();
+        double basePrice = medicineSold.getPrice();
         double discount = 0;
-        if (idClientCard != null && !drugSold.isRecipe()) {
+        if (idClientCard != null && !medicineSold.isRecipe()) {
             discount = 0.1;
         }
-        if (idClientCard != null && drugSold.isRecipe()) {
+        if (idClientCard != null && medicineSold.isRecipe()) {
             discount = 0.15;
         }
         Transaction transaction = new Transaction(id, idDrug, idClientCard, date, time, numberOfItems, basePrice, discount);

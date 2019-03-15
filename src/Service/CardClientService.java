@@ -30,13 +30,14 @@ public class CardClientService {
                 if (dateOfRegistration.isEmpty()) {
                     dateOfRegistration = existing.getDateOfRegistration();
                 }
+
             }
             CardClient cardClient = new CardClient(id, lastName, firstName, CNP, dateOfBirth, dateOfRegistration);
             repository.upsert(cardClient);
-            repository.add(cardClient);
+
+
+
         }
-
-
 
     public void remove(String id){
             repository.remove(id);

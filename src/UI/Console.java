@@ -1,23 +1,23 @@
 package UI;
 
 import Domain.CardClient;
-import Domain.Drug;
+import Domain.Medicine;
 import Domain.Transaction;
 import Service.CardClientService;
-import Service.DrugService;
+import Service.MedicineService;
 import Service.TransactionService;
 
 import java.util.Scanner;
 
 public class Console {
-    private DrugService drugService;
+    private MedicineService medicineService;
     private CardClientService cardClientService;
     private TransactionService transactionService;
 
     private Scanner scanner;
 
-    public Console (DrugService drugService, CardClientService cardClientService, TransactionService transactionService){
-        this.drugService = drugService;
+    public Console (MedicineService medicineService, CardClientService cardClientService, TransactionService transactionService){
+        this.medicineService = medicineService;
         this.cardClientService = cardClientService;
         this.transactionService = transactionService;
 
@@ -25,7 +25,7 @@ public class Console {
     }
 
     private void showMenu() {
-        System.out.println("1. Drug CRUD");
+        System.out.println("1. Medicine CRUD");
         System.out.println("2. Card client CRUD");
         System.out.println("3. Transaction CRUD");
         System.out.println("x. Exit");
@@ -37,7 +37,7 @@ public class Console {
             String option = scanner.nextLine();
             switch (option){
                 case "1":
-                    runDrugCrud();
+                    runMedicineCrud();
                     break;
                 case "2":
                     runCardClientCrud();
@@ -100,8 +100,8 @@ public class Console {
         try {
             System.out.println("Enter id transaction: ");
             String id = scanner.nextLine();
-            System.out.println("Enter drug id (empty to not change for update): ");
-            String idDrug = scanner.nextLine();
+            System.out.println("Enter medicine id (empty to not change for update): ");
+            String idMedicine = scanner.nextLine();
             System.out.println("Enter client card id (empty to not change for update): ");
             String idCardClient = scanner.nextLine();
             System.out.println("Enter number of items (0 to not change for update): ");
@@ -111,7 +111,7 @@ public class Console {
             System.out.println("Enter time (empty to not change for update): ");
             String time = scanner.nextLine();
 
-            Transaction transaction = transactionService.addOrUpdate(id, idDrug, idCardClient, numberOfItems, date, time);
+            Transaction transaction = transactionService.addOrUpdate(id, idMedicine, idCardClient, numberOfItems, date, time);
             System.out.println(String.format("Added transaction id=%s, paid price=%f, discount=%f%%", transaction.getId(),
                     transaction.getDiscountPrice(), transaction.getDiscount()));
         } catch (Exception ex) {
@@ -183,23 +183,23 @@ public class Console {
             System.out.println("Errors:\n" + ex.getMessage());
         }
     }
-    private void runDrugCrud() {
+    private void runMedicineCrud() {
         while (true) {
-            System.out.println("1. Add or update a drug.");
-            System.out.println("2. Remove a drug.");
-            System.out.println("3. View all drugs.");
+            System.out.println("1. Add or update a medicine.");
+            System.out.println("2. Remove a medicine.");
+            System.out.println("3. View all medicine.");
             System.out.println("4. Back.");
 
             String option = scanner.nextLine();
             switch (option) {
                 case "1":
-                    handleAddUpdateDrug();
+                    handleAddUpdateMedicine();
                     break;
                 case "2":
-                    handleRemoveDrug();
+                    handleRemoveMedicine();
                     break;
                 case "3":
-                    handleViewDrugs();
+                    handleViewMedicine();
                     break;
                 case "4":
                     return;
@@ -209,37 +209,37 @@ public class Console {
             }
         }
     }
-    private void handleViewDrugs() {
-        for (Drug drug : drugService.getAll()) {
-            System.out.println(drug);
+    private void handleViewMedicine() {
+        for (Medicine medicine : medicineService.getAll()) {
+            System.out.println(medicine);
         }
     }
-    private void handleRemoveDrug() {
+    private void handleRemoveMedicine() {
         try {
-            System.out.println("Enter the drug id to remove:");
+            System.out.println("Enter the medicine id to remove:");
             String id = scanner.nextLine();
-            drugService.stergere(id);
+            medicineService.stergere(id);
 
-            System.out.println("Drug removed!");
+            System.out.println("Medicine removed!");
         } catch (Exception ex) {
             System.out.println("Errors:\n" + ex.getMessage());
         }
     }
-    private void handleAddUpdateDrug() {
+    private void handleAddUpdateMedicine() {
         try {
-            System.out.println("Enter drug id: ");
+            System.out.println("Enter medicine id: ");
             String id = scanner.nextLine();
-            System.out.println("Enter name of drug (empty to not change for update): ");
+            System.out.println("Enter name of medicine (empty to not change for update): ");
             String name = scanner.nextLine();
-            System.out.println("Enter producer of drug (empty to not change for update): ");
+            System.out.println("Enter producer of medicine (empty to not change for update): ");
             String producer = scanner.nextLine();
-            System.out.println("Enter price of drug (0 to not change for update): ");
+            System.out.println("Enter price of medicine (0 to not change for update): ");
             Double price = Double.parseDouble(scanner.nextLine());
             System.out.println("Enter if exists a recipe (true / false): ");
             boolean recipe = Boolean.parseBoolean(scanner.nextLine());
 
-            drugService.addOrUpdate(id, name, producer, price, recipe);
-            System.out.println("Drug added!");
+            medicineService.addOrUpdate(id, name, producer, price, recipe);
+            System.out.println("Medicine added!");
         } catch (Exception ex) {
             System.out.println("Errors:\n" +  ex.getMessage());
         }

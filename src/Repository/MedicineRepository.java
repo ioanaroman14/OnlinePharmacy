@@ -1,30 +1,30 @@
 package Repository;
 
-import Domain.Drug;
-import Domain.DrugValidator;
+import Domain.Medicine;
+import Domain.MedicineValidator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DrugRepository {
-    private Map<String, Drug> storage = new HashMap<>();
-    private DrugValidator validator;
+public class MedicineRepository {
+    private Map<String, Medicine> storage = new HashMap<>();
+    private MedicineValidator validator;
 
-    public DrugRepository(DrugValidator validator){
+    public MedicineRepository(MedicineValidator validator){
         this.validator = validator;
     }
-    public Drug findById(String id){
+    public Medicine findById(String id){
         return storage.get(id);
     }
     /**
-     * Adds or updates a drug if it already exists.
-     * @param drug to add or update.
+     * Adds or updates a medicine if it already exists.
+     * @param medicine to add or update.
      */
-    public void upsert (Drug drug){
-        validator.validate(drug);
-        storage.put(drug.getId(), drug);
+    public void upsert (Medicine medicine){
+        validator.validate(medicine);
+        storage.put(medicine.getId(), medicine);
     }
     /**
      * Removes a drug with a given id.
@@ -37,7 +37,7 @@ public class DrugRepository {
         }
         storage.remove(id);
     }
-    public List<Drug> getAll(){
+    public List<Medicine> getAll(){
         return new ArrayList<>(storage.values());
     }
 }

@@ -8,12 +8,12 @@ public class CardClient {
     @Override
     public String toString() {
         return "CardClient{" +
-                "id = '" + id + '\'' +
-                ", lastName = '" + lastName + '\'' +
-                ", firstName = '" + firstName + '\'' +
-                ", CNP = '" + CNP + '\'' +
-                ", dateOfBirth = '" + dateOfBirth + '\'' +
-                ", dateOfRegistration = '" + dateOfRegistration + '\'' +
+                "id='" + id + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", CNP='" + CNP + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", dateOfRegistration='" + dateOfRegistration + '\'' +
                 '}';
     }
 

@@ -1,30 +1,30 @@
 
 import Domain.TransactionValidator;
 import Domain.CardClientValidator;
-import Domain.DrugValidator;
+import Domain.MedicineValidator;
 import Repository.CardClientRepository;
-import Repository.DrugRepository;
+import Repository.MedicineRepository;
 import Repository.TransactionRepository;
 import Service.CardClientService;
-import Service.DrugService;
+import Service.MedicineService;
 import Service.TransactionService;
 import UI.Console;
 
 public class Main {
     public static void main(String[] args){
-        DrugValidator drugValidator = new DrugValidator();
+        MedicineValidator medicineValidator = new MedicineValidator();
         CardClientValidator cardClientValidator = new CardClientValidator();
         TransactionValidator transactionValidator = new TransactionValidator();
 
-        DrugRepository drugRepository = new DrugRepository(drugValidator);
+        MedicineRepository medicineRepository = new MedicineRepository(medicineValidator);
         CardClientRepository cardClientRepository = new CardClientRepository(cardClientValidator);
         TransactionRepository transactionRepository = new TransactionRepository(transactionValidator);
 
-        DrugService drugService = new DrugService(drugRepository);
+        MedicineService medicineService = new MedicineService(medicineRepository);
         CardClientService cardClientService = new CardClientService(cardClientRepository);
-        TransactionService transactionService = new TransactionService(transactionRepository, drugRepository);
+        TransactionService transactionService = new TransactionService(transactionRepository, medicineRepository);
 
-        Console console = new Console(drugService, cardClientService, transactionService);
+        Console console = new Console(medicineService, cardClientService, transactionService);
         console.run();
 
 

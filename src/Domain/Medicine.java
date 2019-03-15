@@ -2,13 +2,13 @@ package Domain;
 
 import java.util.Objects;
 
-public class Drug {
+public class Medicine {
     private String id, name, producer;
     private double price;
     private boolean recipe;
 
 
-    public Drug(String id, String name, String producer, double price, boolean recipe) {
+    public Medicine(String id, String name, String producer, double price, boolean recipe) {
         this.id = id;
         this.name = name;
         this.producer = producer;
@@ -20,8 +20,8 @@ public class Drug {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Drug drug = (Drug) o;
-        return id.equals(drug.id);
+        Medicine medicine = (Medicine) o;
+        return id.equals(medicine.id);
     }
 
     @Override
@@ -31,12 +31,12 @@ public class Drug {
 
     @Override
     public String toString() {
-        return "Drug{" +
-                "id = '" + id + '\'' +
-                ", name = '" + name + '\'' +
-                ", producer = '" + producer + '\'' +
-                ", price = " + price +
-                ", recipe = " + recipe +
+        return "Medicine{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", producer='" + producer + '\'' +
+                ", price=" + price +
+                ", recipe=" + recipe +
                 '}';
     }
     public String getId() {

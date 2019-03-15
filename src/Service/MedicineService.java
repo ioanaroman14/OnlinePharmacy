@@ -1,18 +1,18 @@
 package Service;
 
-import Domain.Drug;
-import Repository.DrugRepository;
+import Domain.Medicine;
+import Repository.MedicineRepository;
 
 import java.util.List;
 
-public class DrugService {
-    private final DrugRepository repository;
+public class MedicineService {
+    private final MedicineRepository repository;
 
-    public DrugService(DrugRepository repository){
+    public MedicineService(MedicineRepository repository){
         this.repository = repository;
     }
     public void addOrUpdate (String id, String name, String producer, double price, boolean recipe){
-        Drug existing = repository.findById(id);
+        Medicine existing = repository.findById(id);
         if (existing != null){
             if (name.isEmpty()){
                 name = existing.getName();
@@ -24,13 +24,13 @@ public class DrugService {
                 price = existing.getPrice();
             }
         }
-        Drug drug = new Drug(id, name, producer, price, recipe);
-        repository.upsert(drug);
+        Medicine medicine = new Medicine(id, name, producer, price, recipe);
+        repository.upsert(medicine);
     }
     public void stergere(String id){
         repository.remove(id);
     }
-    public List<Drug> getAll(){
+    public List<Medicine> getAll(){
     return repository.getAll();
     }
 }
