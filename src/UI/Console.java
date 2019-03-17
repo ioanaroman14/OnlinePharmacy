@@ -33,7 +33,6 @@ public class Console {
     public void run(){
         while(true){
             showMenu();
-
             String option = scanner.nextLine();
             switch (option){
                 case "1":
@@ -51,6 +50,7 @@ public class Console {
                         System.out.println("Invalid option!");
                         break;
             }
+
         }
     }
     private void runTransactinCrud(){

@@ -16,10 +16,10 @@ public class TransactionService {
         this.medicineRepository = medicineRepository;
     }
 
-    public Transaction addOrUpdate(String id, String idDrug, String idClientCard, int numberOfItems, String date, String time) {
+    public Transaction addOrUpdate(String id, String idMedicine, String idClientCard, int numberOfItems, String date, String time) {
         Transaction existing = transactionRepository.gasitDupaId(id);
         if (existing != null) {
-            idDrug = existing.getIdDrug();
+            idMedicine = existing.getIdDrug();
 
             if (idClientCard.isEmpty()) {
                 idClientCard = existing.getIdCardClient();
@@ -34,7 +34,7 @@ public class TransactionService {
                 time = existing.getTime();
             }
         }
-        Medicine medicineSold = medicineRepository.findById(idDrug);
+        Medicine medicineSold = medicineRepository.findById(idMedicine);
         if (medicineSold == null) {
             throw new RuntimeException("There is no drug with the given id!");
         }
@@ -46,7 +46,7 @@ public class TransactionService {
         if (idClientCard != null && medicineSold.isRecipe()) {
             discount = 0.15;
         }
-        Transaction transaction = new Transaction(id, idDrug, idClientCard, date, time, numberOfItems, basePrice, discount);
+        Transaction transaction = new Transaction(id, idMedicine, idClientCard, date, time, numberOfItems, basePrice, discount);
         transactionRepository.upsert(transaction);
         return transaction;
     }

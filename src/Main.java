@@ -8,10 +8,14 @@ import Repository.TransactionRepository;
 import Service.CardClientService;
 import Service.MedicineService;
 import Service.TransactionService;
+//import UI.Console;
 import UI.Console;
+import UI.ConsoleLimbajNatural;
+
+
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         MedicineValidator medicineValidator = new MedicineValidator();
         CardClientValidator cardClientValidator = new CardClientValidator();
         TransactionValidator transactionValidator = new TransactionValidator();
@@ -27,6 +31,7 @@ public class Main {
         Console console = new Console(medicineService, cardClientService, transactionService);
         console.run();
 
-
+        //ConsoleLimbajNatural consoleLimbajNatural = new ConsoleLimbajNatural(medicineService,cardClientService,transactionService);
+        //consoleLimbajNatural.run2();
     }
 }

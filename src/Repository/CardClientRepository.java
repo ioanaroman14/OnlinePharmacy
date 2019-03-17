@@ -62,4 +62,6 @@ public class CardClientRepository {
     public List<CardClient> getAll(){
         return new ArrayList<>(storage.values());
     }
+   // if (card.getCNP().equals(CNP)){
+     //   throw new RuntimeException("That CNP already exists!");
 }

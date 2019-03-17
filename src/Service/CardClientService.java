@@ -34,9 +34,6 @@ public class CardClientService {
             }
             CardClient cardClient = new CardClient(id, lastName, firstName, CNP, dateOfBirth, dateOfRegistration);
             repository.upsert(cardClient);
-
-
-
         }
 
     public void remove(String id){
