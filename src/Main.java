@@ -31,7 +31,7 @@ public class Main {
         Console console = new Console(medicineService, cardClientService, transactionService);
         console.run();
 
-        //ConsoleLimbajNatural consoleLimbajNatural = new ConsoleLimbajNatural(medicineService,cardClientService,transactionService);
-        //consoleLimbajNatural.run2();
+        ConsoleLimbajNatural consoleLimbajNatural = new ConsoleLimbajNatural(medicineService,cardClientService,transactionService);
+        consoleLimbajNatural.run2();
     }
 }
