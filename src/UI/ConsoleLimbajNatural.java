@@ -43,11 +43,28 @@ public class ConsoleLimbajNatural {
         System.out.println("x - Exit");
     }
 
+    /**
+     * public static Scanner input = new Scanner(System.in);
+     *
+     * public static void main(String[] args)
+     * {
+     *     System.out.print("Insert a number: ");
+     *     int number = input.nextInt();
+     *     System.out.print("Text1: ");
+     *     String text1 = input.next();
+     *     System.out.print("Text2: ");
+     *     String text2 = input.next();
+     * }
+     */
+   //public static Scanner input = new Scanner(System.in);
+
     public void run2() {
+        //System.out.print("date: ioana,ada");
+        //String date = input.next();
         System.out.println("Alegeti optiunea:");
         System.out.println();
         while (true) {
-            System.out.println();
+
             showMeniu();
             System.out.println();
             //      addMed,5,nurofen,terapia,10,true
@@ -58,8 +75,11 @@ public class ConsoleLimbajNatural {
             //      remTrans,23
             String op = scanner.nextLine();
             String[] option = op.split(",");
+            String[] add = {"addMed","5","nurofen","terapia","10","true"};
             switch (option[0]) {
                 case "addMed":
+                    //System.out.println("Introduceti datele:");
+
                     medicineService.addOrUpdate(option[1], option[2], option[3], Double.parseDouble(option[4]), Boolean.parseBoolean(option[5]));
                     System.out.println("Medicine added!");
                     break;
@@ -72,7 +92,7 @@ public class ConsoleLimbajNatural {
                     System.out.println("Transaction added!");
                     break;
                 case "remMed":
-                    medicineService.stergere(option[1]);
+                    medicineService.remove(option[1]);
                     System.out.println("Medicine removed!");
                     break;
                 case "remCardClient":
@@ -103,7 +123,9 @@ public class ConsoleLimbajNatural {
                     default:
                         System.out.println("Invalid option!");
                         break;
+
                 }
+
             }
-        }
+    }
     }

@@ -1,15 +1,13 @@
 package Domain;
 
-import java.util.Objects;
-
-public class Transaction {
+public class Transaction extends Entity {
     private String id, idDrug, idCardClient, date, time;
     private int numberOfItems;
     private double basePrice, discount;
 
     public Transaction(String id, String idDrug, String idCardClient, String date,
                        String time, int numberOfItems, double basePrice, double discount) {
-        this.id = id;
+        super(id);
         this.idDrug = idDrug;
         this.idCardClient = idCardClient;
         this.date = date;
@@ -20,10 +18,11 @@ public class Transaction {
 
     }
 
+
     @Override
     public String toString() {
         return "Transaction{" +
-                "id = '" + id + '\'' +
+                "id = '" + getId()  + '\'' +
                 ", idDrug = '" + idDrug + '\'' +
                 ", idCardClient = '" + idCardClient + '\'' +
                 ", date = '" + date + '\'' +
@@ -41,27 +40,6 @@ public class Transaction {
    public double getDiscountPrice(){
        return basePrice * numberOfItems - discount * basePrice * numberOfItems;
   }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
-        return Objects.equals(id, that.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, idDrug, idCardClient, date, time, numberOfItems, basePrice, discount);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getIdDrug() {
         return idDrug;
     }
@@ -84,6 +62,15 @@ public class Transaction {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+   // @Override
+   // public String getId() {
+     //   return id;
+   // }
+
+   public void setId(String id) {
+     this.id = id;
     }
 
     public String getTime() {

@@ -1,50 +1,38 @@
 package Domain;
 
-import java.util.Objects;
-
-public class Medicine {
+public class Medicine extends Entity {
     private String id, name, producer;
     private double price;
     private boolean recipe;
 
 
     public Medicine(String id, String name, String producer, double price, boolean recipe) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.producer = producer;
         this.price = price;
         this.recipe = recipe;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Medicine medicine = (Medicine) o;
-        return id.equals(medicine.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, producer, price);
-    }
 
     @Override
     public String toString() {
         return "Medicine{" +
-                "id='" + id + '\'' +
+                "id='" + getId() + '\'' +
                 ", name='" + name + '\'' +
                 ", producer='" + producer + '\'' +
                 ", price=" + price +
                 ", recipe=" + recipe +
                 '}';
     }
-    public String getId() {
-        return id;
-    }
+
+    //@Override
+    //public String getId() {
+      //  return id;
+    //}
 
     public void setId(String id) {
-        this.id = id;
+      this.id = id;
     }
 
     public String getName() {

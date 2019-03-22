@@ -2,22 +2,21 @@ package Service;
 
 import Domain.Medicine;
 import Domain.Transaction;
-import Repository.MedicineRepository;
-import Repository.TransactionRepository;
+import Repository.IRepository;
 
 import java.util.List;
 
 public class TransactionService {
-    private TransactionRepository transactionRepository;
-    private MedicineRepository medicineRepository;
+    private IRepository<Transaction> transactionRepository;
+    private IRepository<Medicine> medicineRepository;
 
-    public TransactionService(TransactionRepository transactionRepository, MedicineRepository medicineRepository) {
+    public TransactionService(IRepository<Transaction>transactionRepository, IRepository<Medicine> medicineRepository) {
         this.transactionRepository = transactionRepository;
         this.medicineRepository = medicineRepository;
     }
 
     public Transaction addOrUpdate(String id, String idMedicine, String idClientCard, int numberOfItems, String date, String time) {
-        Transaction existing = transactionRepository.gasitDupaId(id);
+        Transaction existing = transactionRepository.findById(id);
         if (existing != null) {
             idMedicine = existing.getIdDrug();
 
@@ -51,7 +50,7 @@ public class TransactionService {
         return transaction;
     }
     public  void remove(String id){
-        transactionRepository.sterge(id);
+        transactionRepository.remove(id);
     }
     public List<Transaction> getAll(){
         return transactionRepository.getAll();

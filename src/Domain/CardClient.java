@@ -1,14 +1,12 @@
 package Domain;
 
-import java.util.Objects;
-
-public class CardClient {
+public class CardClient extends Entity {
     private String id, lastName, firstName, CNP, dateOfBirth, dateOfRegistration;
 
     @Override
     public String toString() {
         return "CardClient{" +
-                "id='" + id + '\'' +
+                "id='" + getId() + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", CNP='" + CNP + '\'' +
@@ -17,8 +15,13 @@ public class CardClient {
                 '}';
     }
 
-    public CardClient(String id, String lastName, String firstName, String CNP, String dateOfBirth, String dateOfRegistration) {
+
+    public void setId(String setId) {
         this.id = id;
+    }
+
+    public CardClient(String id, String lastName, String firstName, String CNP, String dateOfBirth, String dateOfRegistration) {
+        super(id);
         this.lastName = lastName;
         this.firstName = firstName;
         this.CNP = CNP;
@@ -26,26 +29,14 @@ public class CardClient {
         this.dateOfRegistration = dateOfRegistration;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CardClient cardClient = (CardClient) o;
-        return Objects.equals(id, cardClient.id);
-    }
+    //@Override
+    //public String getId() {
+      //  return id;
+    //}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, lastName, firstName, CNP, dateOfBirth, dateOfRegistration);
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+   // public void setId(String id) {
+     //   this.id = id;
+    //}
 
     public String getLastName() {
         return lastName;

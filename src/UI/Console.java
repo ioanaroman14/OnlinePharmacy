@@ -28,6 +28,7 @@ public class Console {
         System.out.println("1. Medicine CRUD");
         System.out.println("2. Card client CRUD");
         System.out.println("3. Transaction CRUD");
+        System.out.println("4. Search card clients");
         System.out.println("x. Exit");
     }
     public void run(){
@@ -44,6 +45,9 @@ public class Console {
                 case "3":
                     runTransactinCrud();
                     break;
+                case "4":
+                    runCardClientsSearch();
+                    break;
                 case "x":
                     return;
                     default:
@@ -51,6 +55,14 @@ public class Console {
                         break;
             }
 
+        }
+    }
+    private void runCardClientsSearch(){
+        System.out.println("Give the search: ");
+        String text = scanner.nextLine();
+        System.out.println("The results are: ");
+        for (CardClient c : cardClientService.fullTextSearch(text)){
+            System.out.println(c);
         }
     }
     private void runTransactinCrud(){
@@ -63,10 +75,18 @@ public class Console {
             String option = scanner.nextLine();
             switch (option){
                 case "1":
-                    handleAddUpdateTransaction();
+                    try {
+                        handleAddUpdateTransaction ();
+                    } catch (CustomException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "2":
-                    handleRemoveTransaction();
+                    try {
+                        handleRemoveTransaction();
+                    } catch (CustomException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "3":
                     handleViewTransactions();
@@ -84,9 +104,10 @@ public class Console {
             System.out.println(transaction);
         }
     }
-    private void handleRemoveTransaction(){
+    private void handleRemoveTransaction() throws CustomException{
         try {
-            System.out.println("Enter the id transaction to remove:");
+           // throw new CustomException("Enter the id transaction to remove");
+           System.out.println("Enter the id transaction to remove:");
             String id = scanner.nextLine();
             transactionService.remove(id);
 
@@ -96,7 +117,7 @@ public class Console {
 
         }
     }
-    private void handleAddUpdateTransaction(){
+    private void handleAddUpdateTransaction() throws CustomException{
         try {
             System.out.println("Enter id transaction: ");
             String id = scanner.nextLine();
@@ -128,10 +149,18 @@ public class Console {
             String optiuni = scanner.nextLine();
             switch (optiuni) {
                 case "1":
-                    handleAddUpdateCardClient();
+                    try {
+                        handleAddUpdateCardClient();
+                    } catch (CustomException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "2":
-                    handleRemoveCardClient();
+                    try {
+                        handleRemoveCardClient();
+                    } catch (CustomException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "3":
                     handleViewCardClients();
@@ -149,7 +178,7 @@ public class Console {
             System.out.println(cardClient);
         }
     }
-    private void handleRemoveCardClient(){
+    private void handleRemoveCardClient() throws CustomException{
         try {
             System.out.println("Enter the client card id to remove:");
             String id = scanner.nextLine();
@@ -160,7 +189,7 @@ public class Console {
             System.out.println("Errors: \n" + ex.getMessage());
         }
     }
-    private void handleAddUpdateCardClient(){
+    private void handleAddUpdateCardClient()throws CustomException{
         try {
             System.out.println("Enter client card id: ");
             String id = scanner.nextLine();
@@ -193,10 +222,18 @@ public class Console {
             String option = scanner.nextLine();
             switch (option) {
                 case "1":
-                    handleAddUpdateMedicine();
+                    try {
+                        handleAddUpdateMedicine();
+                    } catch (CustomException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "2":
-                    handleRemoveMedicine();
+                    try {
+                        handleRemoveMedicine();
+                    } catch (CustomException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case "3":
                     handleViewMedicine();
@@ -214,18 +251,18 @@ public class Console {
             System.out.println(medicine);
         }
     }
-    private void handleRemoveMedicine() {
+    private void handleRemoveMedicine()throws CustomException {
         try {
             System.out.println("Enter the medicine id to remove:");
             String id = scanner.nextLine();
-            medicineService.stergere(id);
+            medicineService.remove(id);
 
             System.out.println("Medicine removed!");
         } catch (Exception ex) {
             System.out.println("Errors:\n" + ex.getMessage());
         }
     }
-    private void handleAddUpdateMedicine() {
+    private void handleAddUpdateMedicine() throws CustomException {
         try {
             System.out.println("Enter medicine id: ");
             String id = scanner.nextLine();
